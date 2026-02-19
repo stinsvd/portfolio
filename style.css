@@ -399,7 +399,23 @@ body {
 .item-info p {
     font-size: 0.9rem;
     opacity: 0.5;
+    margin-bottom: 1rem;
 }
+
+.video-direct-link {
+    display: inline-block;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.video-direct-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
 
 /* Skills Section */
 #skills {
