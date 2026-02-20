@@ -121,21 +121,110 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
+    list-style: none;
+    /* Added for ul support */
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a {
-    color: var(--text-color);
     text-decoration: none;
+    color: var(--text-color);
     font-size: 0.9rem;
     font-weight: 500;
-    opacity: 0.7;
     transition: var(--transition);
+    opacity: 0.8;
 }
 
 .nav-links a:hover {
-    opacity: 1;
     color: var(--accent-color);
+    opacity: 1;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid var(--text-color);
+    border-radius: 20px;
+    position: relative;
+    opacity: 0.6;
+}
+
+.wheel {
+    width: 3px;
+    height: 8px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel 2s infinite;
+}
+
+.arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.arrow span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+    transform: rotate(45deg);
+    margin: -4px;
+    animation: scroll-arrow 2s infinite;
+    opacity: 0;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+@keyframes scroll-wheel {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(15px);
+    }
+}
+
+@keyframes scroll-arrow {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-10px, -10px);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(10px, 10px);
+    }
 }
 
 /* Hero Section */
