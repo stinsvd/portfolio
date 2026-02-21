@@ -111,8 +111,6 @@
                             <span>CapCut</span>
                             <span>Vegas Pro</span>
                         </div>
-                        <p class="section-teaser mt-4">Ниже вы найдете примеры динамичных коротких роликов, созданных с
-                            применением этих инструментов ↓</p>
                     </div>
                     <div class="ai-tools fade-in">
                         <h3>AI Stack (Промт-инжиниринг)</h3>
@@ -137,6 +135,9 @@
                             </div>
                         </div>
                     </div>
+                    <p class="section-teaser tech-teaser mt-4 fade-in">Ниже вы найдете примеры динамичных коротких
+                        роликов, созданных с
+                        применением этих инструментов ↓</p>
                 </div>
             </div>
         </section>
@@ -159,7 +160,10 @@
                             <p>Рекламный кейс косметики Celimax. Создание премиального визуала на 90% с помощью
                                 нейросетей. Фокус на текстуре и деталях.</p>
                             <a href="media/Celimax%20promo.mp4" target="_blank"
-                                class="video-direct-link btn-view-short">Посмотреть →</a>
+                                class="video-direct-link btn-view-short">
+                                <span class="btn-icon">▶</span>
+                                <span class="btn-text">Смотреть кейс</span>
+                            </a>
                         </div>
                     </div>
                     <!-- Interium Promo -->
@@ -176,7 +180,31 @@
                             <p>AI-проект для визуализации дизайна помещений. Будущее архитектуры и ремонта в динамичном
                                 промо-ролике мобильного приложения.</p>
                             <a href="media/interium%20promo.mp4" target="_blank"
-                                class="video-direct-link btn-view-short">Посмотреть →</a>
+                                class="video-direct-link btn-view-short">
+                                <span class="btn-icon">▶</span>
+                                <span class="btn-text">Смотреть кейс</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Toys Promo -->
+                    <div class="portfolio-item shorts-item fade-in">
+                        <div class="shorts-content-overlay">
+                            <h3>Промо-ролик детские товары</h3>
+                        </div>
+                        <div class="video-container vertical clean-embed">
+                            <video src="media/Игрушки%20промо.mp4" playsinline loop muted preload="metadata"
+                                class="portfolio-video"></video>
+                        </div>
+                        <div class="item-info">
+                            <h3>Промо-ролик детские товары</h3>
+                            <p>Комплексный видеопродакшн: от сценария и живой съемки до озвучки и динамичного монтажа.
+                                Контент спроектирован для максимального вовлечения: захват внимания через интригу,
+                                презентация преимуществ и четкий призыв к действию (CTA).</p>
+                            <a href="media/Игрушки%20промо.mp4" target="_blank"
+                                class="video-direct-link btn-view-short">
+                                <span class="btn-icon">▶</span>
+                                <span class="btn-text">Смотреть кейс</span>
+                            </a>
                         </div>
                     </div>
                     <!-- Professional Placeholder -->
@@ -208,8 +236,6 @@
                             <li><span>✓</span> Работа со сложными ("тяжелыми") проектами в 4K+</li>
                             <li><span>✓</span> Навыки промпт-инжиниринга для управляемого результата</li>
                         </ul>
-                        <p class="section-teaser mt-4">Давайте перейдем к моим крупнейшим рекламным интеграциям для
-                            международных брендов ↓</p>
                     </div>
                     <div class="about-visual fade-in">
                         <div class="workflow-card">
@@ -222,6 +248,9 @@
                             </div>
                         </div>
                     </div>
+                    <p class="section-teaser about-teaser mt-4 fade-in">Давайте перейдем к моим крупнейшим рекламным
+                        интеграциям для
+                        международных брендов ↓</p>
                 </div>
             </div>
         </section>
@@ -480,6 +509,11 @@
                     </svg>
                 </button>
                 <div class="modal-video-wrapper">
+                    <!-- Loading Spinner -->
+                    <div id="modal-loader" class="modal-loader">
+                        <div class="spinner"></div>
+                        <span>Загрузка...</span>
+                    </div>
                     <video id="modal-player" src=""></video>
                     <div class="custom-controls">
                         <button id="modal-play-pause" class="control-btn">

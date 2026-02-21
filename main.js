@@ -31,7 +31,8 @@ document.querySelectorAll('section, .fade-in, .portfolio-item').forEach(el => {
     revealObserver.observe(el);
 });
 
-// Video Auto-play on Scroll
+// Video Auto-play on Scroll (Disabled by user request)
+/*
 const videoObserverOptions = {
     threshold: 0.6
 };
@@ -48,6 +49,7 @@ const videoObserver = new IntersectionObserver((entries) => {
         }
     });
 }, videoObserverOptions);
+*/
 
 // Video Management (Ensure only one audio source at a time)
 function stopAllVideos(except = null) {
@@ -67,22 +69,22 @@ function stopAllVideos(except = null) {
 }
 
 document.querySelectorAll('.portfolio-video').forEach(video => {
-    videoObserver.observe(video);
+    // videoObserver.observe(video); // Disabled
 
-    // Play on hover (desktop)
+    // Play on hover (Disabled by user request)
+    /*
     video.parentElement.addEventListener('mouseenter', () => {
         video.play().catch(() => { });
     });
+    */
 
     // Unmute on click and stop others
     video.addEventListener('click', (e) => {
         e.stopPropagation(); // Prevent container click from triggering
-        if (video.muted) {
-            stopAllVideos(video);
-            video.muted = false;
-            video.volume = 0.5;
-        } else {
-            video.muted = true;
+        const item = video.closest('.shorts-item');
+        if (item) {
+            const btn = item.querySelector('.btn-view-short');
+            if (btn) btn.click();
         }
     });
 });
@@ -138,14 +140,32 @@ const pauseIcon = playPauseBtn.querySelector('.pause-icon');
 const progressContainer = modal.querySelector('.progress-container');
 const progressFilled = modal.querySelector('.progress-filled');
 
+const modalLoader = document.getElementById('modal-loader');
+
 function openModal(videoSrc) {
     stopAllVideos();
+    modalLoader.classList.add('active'); // Show loader
     modalPlayer.src = videoSrc;
-    modalPlayer.load(); // Standard fix for JS src changes
+    modalPlayer.load();
     modal.classList.add('active');
+
+    // Auto-play when ready
     modalPlayer.play();
     updatePlayPauseIcons(true);
 }
+
+// Modal Loading Logic
+modalPlayer.addEventListener('waiting', () => {
+    modalLoader.classList.add('active');
+});
+
+modalPlayer.addEventListener('canplay', () => {
+    modalLoader.classList.remove('active');
+});
+
+modalPlayer.addEventListener('playing', () => {
+    modalLoader.classList.remove('active');
+});
 
 function closeModal() {
     modal.classList.remove('active');
@@ -163,13 +183,29 @@ function updatePlayPauseIcons(isPlaying) {
     }
 }
 
-// Open modal on "Посмотреть" click
-document.querySelectorAll('.btn-view-short').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+// Open modal on "Посмотреть" click or card click
+document.querySelectorAll('.shorts-item').forEach(item => {
+    const btn = item.querySelector('.btn-view-short');
+
+    // Clicking the entire card opens the modal
+    item.addEventListener('click', (e) => {
+        // Don't trigger if we clicked the direct link button (it will call btn click anyway)
+        if (e.target.closest('.btn-view-short')) return;
+
         e.preventDefault();
-        const videoSrc = btn.getAttribute('href');
-        openModal(videoSrc);
+        if (btn) {
+            const videoSrc = btn.getAttribute('href');
+            openModal(videoSrc);
+        }
     });
+
+    if (btn) {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const videoSrc = btn.getAttribute('href');
+            openModal(videoSrc);
+        });
+    }
 });
 
 modalClose.addEventListener('click', closeModal);

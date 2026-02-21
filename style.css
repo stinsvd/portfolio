@@ -1262,6 +1262,7 @@ footer {
 
 /* Section Teasers */
 .section-teaser {
+    grid-column: 1 / -1;
     font-size: 0.95rem;
     color: var(--accent-color);
     opacity: 0.8;
@@ -1288,4 +1289,91 @@ footer {
         opacity: 0.5;
         transform: translateX(0);
     }
+}
+
+/* Modal Loader */
+.modal-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 5;
+}
+
+.modal-loader.active {
+    display: flex;
+}
+
+.modal-loader .spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.modal-loader span {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Redesigned Play Button */
+.btn-view-short {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--accent-color);
+    color: white !important;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px -5px var(--accent-glow);
+    width: fit-content;
+}
+
+.btn-view-short:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px -10px var(--accent-glow);
+    background: #4f8ff7;
+}
+
+.btn-icon {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding-left: 2px;
+    /* Visual offset for the triangle icon */
+}
+
+.btn-text {
+    line-height: 1;
+}
+
+.shorts-item {
+    cursor: pointer;
+}
+
+.shorts-item:active {
+    transform: scale(0.98);
 }
