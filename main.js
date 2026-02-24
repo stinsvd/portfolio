@@ -27,7 +27,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, revealObserverOptions);
 
 // Observe sections and animated elements
-document.querySelectorAll('section, .fade-in, .portfolio-item').forEach(el => {
+document.querySelectorAll('section, .fade-in, .portfolio-item, .integration-card, .reveal').forEach(el => {
     revealObserver.observe(el);
 });
 
@@ -142,9 +142,18 @@ const progressFilled = modal.querySelector('.progress-filled');
 
 const modalLoader = document.getElementById('modal-loader');
 
-function openModal(videoSrc) {
+function openModal(videoSrc, isHorizontal = false) {
     stopAllVideos();
     modalLoader.classList.add('active'); // Show loader
+
+    // Set aspect ratio class
+    const modalContent = modal.querySelector('.modal-content');
+    if (isHorizontal) {
+        modalContent.classList.add('horizontal');
+    } else {
+        modalContent.classList.remove('horizontal');
+    }
+
     modalPlayer.src = videoSrc;
     modalPlayer.load();
     modal.classList.add('active');
@@ -184,7 +193,7 @@ function updatePlayPauseIcons(isPlaying) {
 }
 
 // Open modal on "Посмотреть" click or card click
-document.querySelectorAll('.shorts-item').forEach(item => {
+document.querySelectorAll('.shorts-item, .featured-project').forEach(item => {
     const btn = item.querySelector('.btn-view-short');
 
     // Clicking the entire card opens the modal
@@ -195,7 +204,8 @@ document.querySelectorAll('.shorts-item').forEach(item => {
         e.preventDefault();
         if (btn) {
             const videoSrc = btn.getAttribute('href');
-            openModal(videoSrc);
+            const isHorizontal = item.classList.contains('featured-project');
+            openModal(videoSrc, isHorizontal);
         }
     });
 
@@ -203,7 +213,8 @@ document.querySelectorAll('.shorts-item').forEach(item => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const videoSrc = btn.getAttribute('href');
-            openModal(videoSrc);
+            const isHorizontal = item.classList.contains('featured-project');
+            openModal(videoSrc, isHorizontal);
         });
     }
 });
